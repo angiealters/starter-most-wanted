@@ -4,9 +4,12 @@
 */
 
 function filterByName(firstName, lastName, people){
-
-	// return an aray containing the people matching the name
+//	return (firstName, lastName, people);
 }
+//	var nameSearch = data.filter(filterByName);
+
+	// return an array containing the people matching the name
+
 
 function getFamily(person, people){
 

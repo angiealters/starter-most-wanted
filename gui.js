@@ -4,15 +4,18 @@
 
 // app is the function called to start the entire application
 function app(people){
-  var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
+  var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
       // TODO: search by name
+	  searchByName();
       break;
     case 'no':
       // TODO: search by traits
+	  searchByTrait();
       break;
     default:
+	  alert ("Please enter 'yes' or 'no'");
       app(people); // restart app
       break;
   }
@@ -53,9 +56,33 @@ function mainMenu(person, people){
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
-
+  displayPerson();
   // TODO: find the person using the name they entered
 
+}
+function searchByTrait(traits){
+	var traitType = promptFor("Search for traits by entering one of the following options: 'age', 'height', 'weight', 'occupation', 'eye color'", selectTrait).toLowerCase();
+	switch (traitType){
+		case 'age':
+			promptFor("Please enter person's age", chars);
+			break;
+		case 'height':
+			promptFor("Please enter person's height in inches", chars);
+			break;
+		case 'weight':
+			promptFor("Please enter person's weight", chars);
+			break;
+		case 'occupation':
+			promptFor("Please enter person's occupation", chars);
+			break;
+		case 'eye color':
+			promptFor("Please enter person's eye color", chars);
+			break;
+		default: 
+			return searchByTrait(traits);
+			break;
+	}
+	displayPeople();
 }
 
 // alerts a list of people
@@ -77,7 +104,7 @@ function displayPerson(person){
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
-    var response = prompt(question);
+    var response = prompt(question).trim();
   } while(!response || !valid(response));
   return response;
 }
@@ -86,8 +113,10 @@ function promptFor(question, valid){
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
-
+function selectTrait(input){
+	return input.toLowerCase() == "age" || input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "occupation" || input.toLowerCase() == "eye color";
+}
 // helper function to pass in as default promptFor validation
 function chars(input){
-  return false; // default validation only
+  return true; // default validation only
 }
