@@ -1,17 +1,11 @@
 "use strict";
 
-/*
-  Build all of your functions for the application below.
-	Some functions have been stubbed out.
-*/
-
 function filterByName(firstName, lastName, people){
 	var results = people.filter(function(person){
 		return firstName === person.firstName && lastName === person.lastName
 	});
 	return results;	
 }
-// return an array containing the people matching the name
 function getDescendants(person, people, descendants=[]){
 	var results = people.filter(function(el){
 		return person.id === el.parents[0] || person.id === el.parents[1]
@@ -26,10 +20,25 @@ function getDescendants(person, people, descendants=[]){
 	return descendants;
 }
 
+function getFamily(person, people, id = []){
+	var results = people.filter(function(el){
+		return id === person.id 		
+	});
+	return results;
+}
+function findParents(person, people){
+	var results = getFamily(person, people);
+		if (person.parents != person.id){
+			return ("No parents found");
+		}else if (person.parents === person.id){
+			return results;
+		}
+	return results;
+}
+function displayFamilyInfo(person, people){
+	var familyInfo = findParents(person,people);
+	alert("Parents: " + person[0].firstName +" "+ person[0].lastName + "\n");
 
-function getFamily(person, people){
-
-	// return an array containing the family members (objects)
 }
 
 /*
