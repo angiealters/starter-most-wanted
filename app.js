@@ -7,19 +7,18 @@ function filterByName(firstName, lastName, people){
 	return results;	
 }
 function getDescendants(person, people, descendants=[]){
-	var results = people.filter(function(el){
-		return person.id === el.parents[0] || person.id === el.parents[1]
+	var kids = people.filter(function(el){
+		return el.parents[0] === person.id || el.parents[1] === person.id;
 	});
-	if (!results){
-		return descendants;
-	}
-	for (var i = 0; i< results.length; i++){
-		descendants.push(results[i]);
-		descendants = getDescendants(results[i], people, descendants)
+	descendants.push(...kids);
+	if(kids.length > 0){
+		for (var i=0; i<kids.length; i++){
+			getDescendants(kids[i], people, descendants);
+		}
 	}
 	return descendants;
 }
-
+		
 function getFamily(person, people, id = []){
 	var results = people.filter(function(el){
 		return id === person.id 		
@@ -37,7 +36,8 @@ function findParents(person, people){
 }
 function displayFamilyInfo(person, people){
 	var familyInfo = findParents(person,people);
-	alert("Parents: " + person[0].firstName +" "+ person[0].lastName + "\n");
+	 "Parents: " + person[0].firstName +" "+ person[0].lastName + "\n";
+	alert(familyInfo);
 
 }
 

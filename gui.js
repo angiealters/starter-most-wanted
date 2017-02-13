@@ -31,10 +31,8 @@ function mainMenu(person, people){
 			displayFamilyInfo(person,people);
 			break;
 		case "descendants":
-			var descendants = getDescendants(person, people);
-			for(var i = 0; i < descendants.length; i++){
-				alert(descendants[i].firstName +" "+ descendants[i].lastName);
-			}
+			alert(getDescendants(person[0], data));
+
 			break;
 		case "restart":
 			app(people);
